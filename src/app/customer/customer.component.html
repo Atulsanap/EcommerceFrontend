@@ -1,0 +1,189 @@
+<div class="container mt-3 mt-lg-5">
+  <div class="row mx-0">
+    <div class="col-md-12">
+
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item active" aria-current="page">Ecommerce</li>
+        </ol>
+      </nav>
+
+    <div class="tab-content">
+      <div class="tab-pane tabs-animation fade show active">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              <div class="card-body">
+
+                <div class="row">
+                  <div class="col-md-8 m-auto">
+
+                    <form id="contact-form" class="main-form needs-validation" [formGroup]="registerForm">
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <label> Name</label>
+                          <input name="Name" [ngClass]="{ 'is-invalid': submitted && f.Name.errors }"
+                            formControlName="Name" placeholder="Name" type="text"
+                            class="form-control my_form-control" >
+
+                          <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
+                            <div *ngIf="f.Name.errors.required">Name is required</div>
+                          </div>
+                          <span class="text-danger"
+                            *ngIf="registerForm.get('Name').hasError('pattern') && registerForm.get('Name').touched">Please
+                            enter valid Name number</span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                          <label>Discription</label>
+                          <input name="Discription" [ngClass]="{ 'is-invalid': submitted && f.Discription.errors }"
+                            formControlName="Discription" type="text" style="text-transform: capitalize;"
+                            class="form-control my_form-control" placeholder="Discription">
+
+                          <div *ngIf="submitted && f.Discription.errors" class="invalid-feedback">
+                            <div *ngIf="f.Discription.errors.required">Discription is required</div>
+                          </div>
+
+                          <span class="text-danger"
+                            *ngIf="registerForm.get('Discription').hasError('pattern') && registerForm.get('Discription').touched">Please
+                            enter valid Discription.</span>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                          <label>Price</label>
+                          <input name="Price" [ngClass]="{ 'is-invalid': submitted && f.Price.errors }"
+                            formControlName="Price" placeholder="Price" type="text"
+                            style="text-transform: capitalize;" class="form-control my_form-control">
+
+                          <div *ngIf="submitted && f.Price.errors" class="invalid-feedback">
+                            <div *ngIf="f.Price.errors.required">Price is required</div>
+                          </div>
+                          <span class="text-danger"
+                            *ngIf="registerForm.get('Price').hasError('pattern') && registerForm.get('Price').touched">Please
+                            enter valid Price.</span>
+
+                        </div>
+                      </div>
+                      <div class="col-12 text-right">
+                        <button class="btn btn-primary" (click)="Submit()">Submit</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div >
+<div class="alert alert-primary" role="alert" *ngIf="Issuccess">
+  Data Added Successfully.
+</div>
+<div class="alert alert-primary" role="alert"  *ngIf="Isupdated">
+  Data updated Successfully.
+</div>
+<div class="alert alert-primary" role="alert"  *ngIf="Isdeleted" >
+  Data Deleted Successfully.
+</div>
+
+</div>
+
+    <table class="table mt-5">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Discription</th>
+          <th scope="col">Price</th>
+          <th scope="col">Edit</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of alldata"> 
+           <td >{{item.name}}</td>
+          <td >{{item.discription}}</td>
+          <td >{{item.price}}</td>
+          <td><button class="btn btn-primary btn-sm" (click)="Edit(item)" data-toggle="modal" data-target="#exampleModal">Edit</button></td>
+          <td><button class="btn btn-primary btn-sm" (click)="Delete(item)">Delete</button></td>
+        </tr>
+     
+      </tbody>
+    </table>
+
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div [formGroup]="registerForm">
+    
+          <form id="contact-form" class="main-form needs-validation" [formGroup]="registerForm">
+            <div class="row">
+              <div class="form-group col-md-6">
+                <label> Name</label>
+                <input name="Name" [ngClass]="{ 'is-invalid': submitted && f.Name.errors }"
+                  formControlName="Name" placeholder="Name" type="text"
+                  class="form-control my_form-control" >
+      
+                <div *ngIf="submitted && f.Name.errors" class="invalid-feedback">
+                  <div *ngIf="f.Name.errors.required">Name is required</div>
+                </div>
+                <span class="text-danger"
+                  *ngIf="registerForm.get('Name').hasError('pattern') && registerForm.get('Name').touched">Please
+                  enter valid Name number</span>
+              </div>
+      
+              <div class="form-group col-md-6">
+                <label>Discription</label>
+                <input name="Discription" [ngClass]="{ 'is-invalid': submitted && f.Discription.errors }"
+                  formControlName="Discription" type="text" style="text-transform: capitalize;"
+                  class="form-control my_form-control" placeholder="First Name">
+      
+                <div *ngIf="submitted && f.Discription.errors" class="invalid-feedback">
+                  <div *ngIf="f.Discription.errors.required">Discription is required</div>
+                </div>
+      
+                <span class="text-danger"
+                  *ngIf="registerForm.get('Discription').hasError('pattern') && registerForm.get('Discription').touched">Please
+                  enter valid Discription.</span>
+              </div>
+      
+              <div class="form-group col-md-6">
+                <label>Price</label>
+                <input name="Price" [ngClass]="{ 'is-invalid': submitted && f.Price.errors }"
+                  formControlName="Price" placeholder="Price" type="text"
+                  style="text-transform: capitalize;" class="form-control my_form-control">
+      
+                <div *ngIf="submitted && f.Price.errors" class="invalid-feedback">
+                  <div *ngIf="f.Price.errors.required">Price is required</div>
+                </div>
+                <span class="text-danger"
+                  *ngIf="registerForm.get('Price').hasError('pattern') && registerForm.get('Price').touched">Please
+                  enter valid Price.</span>
+      
+              </div>
+            </div>
+        
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="mt-2 col-12 text-right">
+          <button class="btn btn-primary" (click)="Update()">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
