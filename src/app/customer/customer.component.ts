@@ -35,13 +35,9 @@ export class CustomerComponent implements OnInit {
 // {'id':2 , 'name': 'one' ,'discription':'dgf','price':354},
 // {'id':3 , 'name': 'one' ,'discription':'dgf','price':645}]
     this.GetAll();
-    debugger
-     this.modal.open(this.formModal);
   }
 
   get f() { return this.registerForm.controls; }
-
-  get g() { return this.registerForm.controls; }
 
   Submit(){debugger
     this.submitted =true;
@@ -66,8 +62,7 @@ export class CustomerComponent implements OnInit {
 }
 }
 
-
-Edit(data){debugger
+Edit(data){
   this.customer = this.alldata.filter(x =>x.id == data.id);
   this.modal.open(this.formModal, {
     size: "lg",
@@ -80,7 +75,6 @@ Edit(data){debugger
      this.registerForm.controls["Discription"].setValue(this.customer[0].Discription);
      this.registerForm.controls["Price"].setValue(this.customer[0].Price);
   }
-
 }
 
 Update(){
@@ -100,13 +94,11 @@ Update(){
           this.message = data[0];
           this.alldata = data[1];
           if(this.message =="Updated")
-          this.Isupdated =true;
-          
-               
+          this.Isupdated =true;          
     });
 }
 
-GetAll(){debugger
+GetAll(){
   let CustomerModel = {
     ProcessType : 'Getall'
   };
@@ -117,10 +109,8 @@ GetAll(){debugger
   });
 }
 
-
-Delete(event){debugger
+Delete(event){
  let ID = event.id;
-
 var data = 
   this.dataservice.delete<any>("home/delete",ID).subscribe((data:any)=>{
     var data = data[0];
@@ -129,15 +119,4 @@ var data =
           this.Isdeleted = true;
   });
 }
-
-openPopup(id) {
-  // this.customer=this.alldata.filter(x =>x.id == id);
-    this.modal.open(this.formModal, {
-      size: "lg",
-      backdrop: "static",
-      keyboard: false,
-    });
-  }
-
-
 }
